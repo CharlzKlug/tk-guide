@@ -1,0 +1,1 @@
+wish -name "My Wish Application"
