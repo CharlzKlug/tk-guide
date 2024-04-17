@@ -1,0 +1,1 @@
+glob -types f -directory ~/tmp *
