@@ -1,0 +1,2 @@
+eltclsh > file attributes a.out 
+-group user -owner user -permissions 00775
