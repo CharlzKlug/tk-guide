@@ -1,0 +1,17 @@
+eltclsh > set fname /usr/src/tcl8.4.1/generic/tcl.h
+/usr/src/tcl8.4.1/generic/tcl.h
+
+eltclsh > file tail $fname
+tcl.h
+
+eltclsh > file rootname $fname
+/usr/src/tcl8.4.1/generic/tcl
+
+eltclsh > file rootname [file tail $fname]
+tcl
+
+eltclsh > file dirname $fname
+/usr/src/tcl8.4.1/generic
+
+eltclsh > file tail [file dirname $fname]
+generic
