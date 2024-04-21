@@ -1,0 +1,3 @@
+eltclsh > read stdin 1
+dkjf
+d
