@@ -1,5 +1,14 @@
 #!/usr/bin/env tclsh
 
+proc revert {inputSentence} {
+    set result {}
+    for {set i [expr {[llength $inputSentence] - 1}]} {$i > -1} \
+	{incr i -1} {
+	lappend result [lindex $inputSentence $i]
+    }
+    return $result
+}
+
 proc serverOpen {channel addr port} {
     puts "New connection: address: $addr, port: $port"
     dialog $channel
@@ -11,11 +20,11 @@ proc dialog {inputChannel} {
     while {!$finishDialog} {
 	puts $inputChannel "Please, enter your word:"
 	flush $inputChannel
-	gets $inputChannel someWord
-	if {$someWord eq "quit"} {
+	gets $inputChannel inputSentence
+	if {$inputSentence eq "quit"} {
 	    set finishDialog true
 	}
-	puts $inputChannel "Answer: [string reverse $someWord]"
+	puts $inputChannel "Answer: [revert $inputSentence]"
     }
 }
 
