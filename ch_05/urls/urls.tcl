@@ -9,3 +9,5 @@ set urls {
     expect.nist.gov/ "Expect Home Page"
     www.tclcommunityassociation.org "Tcl/Tk Community Association"
 }
+
+set urlList [split $urls "\n"]
