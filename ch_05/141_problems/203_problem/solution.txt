@@ -1,0 +1,21 @@
+Write a regexp command that will extract:
+
+* The first word from a string
+> regexp -inline -- {^[a-zA-Z]*} "Regular expressions are useful and powerful"
+Regular
+
+* The second word from a string
+> regexp {[a-zA-Z]* ([a-zA-Z]*)} "A quick brown 30$ fox jumps" full secondWord
+1
+> puts $secondWord
+quick
+
+* A word with the letters ss in it
+> regexp -inline -- {[a-zA-Z]*ss.*} "A quick brown 30$ fox jumps expressions"
+expressions
+
+* A word of 2 to 4 letters long
+> regexp {(^| )([a-zA-Z]{2,4})( |$)} "A quick brown 30$ foxyc jumps expressions fo" full first second
+1
+> puts $second
+fo
