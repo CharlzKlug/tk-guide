@@ -1,0 +1,17 @@
+Write a regexp command that will extract the following substrings from the string "Regular expressions are useful and powerful". Note that these substrings can be matched by a regular expression that is not a set of atoms identical to the substring.
+
+* Regular expressions are us
+> regexp -inline -- {^.*us} "Regular expressions are useful and powerful"
+{Regular expressions are us}
+
+* expressions
+> regexp -inline -- {ex[^ ]*} "Regular expressions are useful and powerful"
+expressions
+
+* pow
+> regexp -inline -- {po[^e]*} "Regular expressions are useful and powerful"
+pow
+
+* useful and powerful
+> regexp -inline -- {us.*$} "Regular expressions are useful and powerful"
+{useful and powerful}
