@@ -1,0 +1,4 @@
+# The lsearch command will return the index of the first match to a pattern. Write a one-line command (using square brackets) to return the first list element that matches a pattern, instead of the index.
+set list {0 1 2 zzz}
+> lindex $list [lsearch $list zzz]
+zzz
