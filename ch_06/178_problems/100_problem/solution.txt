@@ -1,0 +1,2 @@
+Given a large amount of data, which  is likely to be faster: using lsearch to search a list or indexing the data in an associative array?
+For search a data in a large amount of data preferable using indexing the data in an associative array.
