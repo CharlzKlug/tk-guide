@@ -31,10 +31,14 @@ proc search-dup-passwords {inputPwdList} {
 
 	dict lappend passes $pass [list $username $name]
     }
+    puts "Identical passwords:"
     foreach key [dict keys $passes] {
-	if 
+	if {[llength [dict get $passes $key]] > 1} {
+	    puts ""
+	    puts "Password: $key"
+	    foreach names [dict get $passes $key] {
+		puts "    Username: [lindex $names 0], name: [lindex $names 1]"
+	    }
+	}
     }
-    puts [llength [dict get $passes JanePwd]]
-    puts [dict get $passes JanePwd]
-    
 }
