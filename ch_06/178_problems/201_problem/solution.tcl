@@ -42,3 +42,13 @@ proc search-dup-passwords {inputPwdList} {
 	}
     }
 }
+
+# c. Will you get the record with John Doe's password using an lsearch pattern of John*?
+proc get-john-doe-pass {inputDatas} {
+    set johnDoeRecordIndex [lsearch $inputDatas {*{Name {John*}}*}]
+    set johnDoeRecord [lindex $inputDatas $johnDoeRecordIndex]
+    set johnDoePassIndex [lsearch $johnDoeRecord {Password*}]
+    set johnDoePassField [lindex $johnDoeRecord $johnDoePassIndex]
+    set johnDoePass [lindex $johnDoePassField 1]
+    return $johnDoePass
+}
