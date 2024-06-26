@@ -52,3 +52,20 @@ proc get-john-doe-pass {inputDatas} {
     set johnDoePass [lindex $johnDoePassField 1]
     return $johnDoePass
 }
+
+# d. Write a short script that would change John Smith's user name to jsmith
+proc change-user-name {inputPwdList inputName inputUserName} {
+    set searchPattern [list Name $inputName]
+    set result {}
+    foreach record $inputPwdList {
+	set nameIndex [lsearch $record $searchPattern]
+	if {$nameIndex == -1} {lappend result $record} {
+	    set passwdIndex [lsearch $record {Password*}]
+	    lappend result [list [lindex $record $nameIndex] \
+				[list UserName $inputUserName] \
+				[lindex $record $passwdIndex] \
+			       ]
+	}
+    }
+    return $result
+}
