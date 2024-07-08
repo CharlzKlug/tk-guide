@@ -1,0 +1,2 @@
+After a procedure has returned, can you access any of the local variables that were used in that procedure?
+No, I can't access any of the local variables after a procedure has  returned.
