@@ -1,0 +1,2 @@
+If procA invokes procB, can procB local variables be accessed from procA?
+No, procB local variables can not be accessed from procA.
