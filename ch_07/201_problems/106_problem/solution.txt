@@ -1,0 +1,2 @@
+Under what circumstances would the subst command be preferable to using the set command?
+When you have many nested variable resolves.
