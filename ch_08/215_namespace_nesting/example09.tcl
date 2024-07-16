@@ -27,7 +27,6 @@ namespace eval unique1 {
 	return "unique1::example: [getNext]"
     }
 }
-
 # Create the unique2 namespace,
 # Create a uniqueNumber namespace within the unique2 namespace
 # The unique2 namespace includes a procedure to report unique
