@@ -1,0 +1,13 @@
+Can a Tcl namespace be nested within another namespace?
+
+Yes, a Tcl namespace can be nested within another namespace. Example:
+
+eltclsh > namespace eval ns1 {
+: namespace eval ns2 {
+: proc f2 {} {
+: return 43
+: }
+: }
+: }
+eltclsh > ::ns1::ns2::f2
+43
