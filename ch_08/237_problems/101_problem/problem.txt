@@ -1,0 +1,11 @@
+What Tcl commands can be used to build an index of available procedures?
+
+To list available procedures you can use "info procs" command.
+
+Example:
+
+eltclsh > info procs
+aska auto_load_index unknown auto_import auto_execok LoadBLT25 pkg_mkIndex auto_qualify tclPkgUnknown auto_load tclPkgSetup wrappedputs history mapscan tclLog shift
+
+eltclsh > ::tcl::info::procs
+aska auto_load_index unknown auto_import auto_execok LoadBLT25 pkg_mkIndex auto_qualify tclPkgUnknown auto_load tclPkgSetup wrappedputs history mapscan tclLog shift
