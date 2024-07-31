@@ -1,0 +1,3 @@
+Can a Tcl namespace be used in a package?
+
+Yes, namespace can be used in a package.
