@@ -1,0 +1,3 @@
+What Tcl commands support building modular programs?
+
+namespace eval, namespace import, namespace export, namespace ensemble.
