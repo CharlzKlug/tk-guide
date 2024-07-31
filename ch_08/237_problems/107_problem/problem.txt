@@ -1,0 +1,3 @@
+What Tcl command will build a package index file?
+
+For build a package index file you can use 'pkg_mkIndex' command.
