@@ -1,0 +1,3 @@
+What Tcl commands provide encapsulation functionality?
+
+Encapsulation functionality in Tcl provides by the namespace commands.
