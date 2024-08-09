@@ -24,11 +24,17 @@ proc makeQueue {inputNamespaceName} {
 	    return [llength ${fifoList}]
 	}
 
+	proc printQueue {} {
+	    variable fifoList
+	    puts "Queue content is $fifoList"
+	}
+
 	namespace ensemble create -map {
 	    push "push"
 	    pop "pop"
 	    peek "peek"
 	    size "size"
+	    printQueue "printQueue"
 	}
     }
 	    ]
@@ -36,8 +42,13 @@ proc makeQueue {inputNamespaceName} {
 
 proc makeCheckoutCounter {inputCounterName} {
     uplevel [list namespace eval $inputCounterName {
+	variable currentTime 0
 	makeQueue queueCustomers
 	makeQueue queueWaitTime
+	proc proceedTime {} {
+	    variable currentTime
+
+	}
 	namespace ensemble create -map {
 	    queueCustomers "queueCustomers"
 	    queueWaitTime "queueWaitTime"
