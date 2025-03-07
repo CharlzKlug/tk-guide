@@ -41,3 +41,6 @@ puts "With a magic helmet elmer is [elmer defense 8]"
 puts "\n Add a spear to the elmer object"
 oo::objdefine elmer mixin spear
 puts "With spear and magic helmet elmer is [elmer defense 8]"
+
+puts [info class mixin warrior]
+puts [info object mixin elmer]
