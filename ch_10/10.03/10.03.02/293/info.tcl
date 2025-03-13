@@ -39,3 +39,24 @@ puts "	  [info object methods elmer]"
 
 puts "All the methods for the object elmer are:"
 puts "	  [info object methods elmer -all]"
+
+oo::define character forward attack attackStrength
+
+proc attackStrength {} {
+    return 8
+}
+
+puts "After adding forward, the methods for the character class are: "
+puts "	  [info class methods character]"
+
+oo::define character method inputTest {val} {
+    if {![string is integer $val]} {
+	set val 0
+    }
+    next $val
+}
+
+oo::define character filter inputTest
+
+puts "After adding filter, the methods for the class are:"
+puts "	  [info class methods character]"
