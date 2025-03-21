@@ -60,3 +60,6 @@ oo::define character filter inputTest
 
 puts "After adding filter, the methods for the class are:"
 puts "	  [info class methods character]"
+
+puts "The filters defined for the character class are:"
+puts "	 [info class filters character]"
