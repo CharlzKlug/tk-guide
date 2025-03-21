@@ -63,3 +63,35 @@ puts "	  [info class methods character]"
 
 puts "The filters defined for the character class are:"
 puts "	 [info class filters character]"
+
+proc defineClass {className} {
+    puts "oo::class create class $className \{"
+
+    foreach m [info class methods character] {
+	switch [info class methodtype character $m] {
+	    forward {
+		set forwardTo [info class forward character $m]
+		append cmds "\n# Method $m is forwarded to $forwardTo\n"
+		append cmds "oo::define $className forward $m $forwardTo\n"
+		set procArgs [info args $forwardTo]
+		set procBody [info body $forwardTo]
+		append cmds [list proc $m $procArgs $procBody]
+	    }
+	    method {
+		puts "\n# Definition of method $m"
+		puts "method $m [info class definition character $m]"
+	    }
+	}
+    }
+    puts "\}"
+
+    puts "\n# These filters are defined for $className"
+    foreach f [info class filters $className] {
+	puts "oo::define character filter $f"
+    }
+
+    puts "\n # These forwards are defined for $className"
+    puts $cmds
+}
+
+puts "Full definition [defineClass character]"
