@@ -17,4 +17,7 @@ oo::class create book {
     method getAuthor {} {
 	return $author
     }
+    method getTitle {} {
+	return $title
+    }
 }
