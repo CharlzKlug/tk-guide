@@ -9,10 +9,11 @@ oo::class create Beat {
     }
     method printTimeStamp {inputMessage} {
 	puts "[clock format [clock seconds]]: heartbeat"
-	chan puts $fileId "[clock format [clock seconds]]: $inputMessage"
+	puts $fileId
+	puts $fileId "[clock format [clock seconds]]: $inputMessage"
     }
     method heartbeat {} {
-	my printTimeStamp heartbeat
+	after 0 [list [self] printTimeStamp heartbeat]
 	after 10000 [list [self] heartbeat]
     }
     destructor {
@@ -22,7 +23,8 @@ oo::class create Beat {
 }
 
 Beat create myBeat "info.txt"
-myBeat printTimeStamp hello
+# myBeat printTimeStamp hello
 myBeat heartbeat
+after 20000 [list set forever 1]
 vwait forever
 myBeat destroy
