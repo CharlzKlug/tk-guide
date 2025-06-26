@@ -13,9 +13,19 @@ proc pigLatin {inputWord} {
     return $latinWord
 }
 
+proc sendTextToLabel {inputLabel inputEntry} {
+    # global .lbl
+    # global .entry
+    # puts [.entry get]
+    global $inputLabel
+    global $inputEntry
+    puts [$inputEntry get]
+
+    $inputLabel configure -text [$inputEntry get]
+}
 entry .entry
 label .lbl -text "No text"
-button .btn -text "To label"
+button .btn -text "To label" -command "sendTextToLabel .lbl .entry"
 grid .entry
 grid .lbl
 grid .btn
