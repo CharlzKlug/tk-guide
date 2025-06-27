@@ -14,15 +14,26 @@ proc pigLatin {inputWord} {
 }
 
 proc sendTextToLabel {inputLabel inputEntry} {
-    # global .lbl
-    # global .entry
-    # puts [.entry get]
     global $inputLabel
     global $inputEntry
-    puts [$inputEntry get]
-
+    set result ""
+    set inputString [$inputEntry get]
+    set someWord ""
+    for {set i 0} {$i < [string length $inputString]} {incr i} {
+        set currentChar [string index $inputString $i]
+        if {![string is alnum $currentChar] && $someWord != ""} {
+            set result ${result}[pigLatin $someWord]
+            set someWord ""
+        }
+        if {![string is alnum $currentChar]} {
+            set result ${result}${currentChar}
+        } {set someWord ${someWord}${currentChar}}
+    }
+    if {[string length $someWord] > 0} {set result ${result}[pigLatin $someWord]}
     $inputLabel configure -text [$inputEntry get]
+    $inputLabel configure -text $result
 }
+
 entry .entry
 label .lbl -text "No text"
 button .btn -text "To label" -command "sendTextToLabel .lbl .entry"
