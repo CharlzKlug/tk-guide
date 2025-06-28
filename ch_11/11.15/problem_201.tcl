@@ -21,8 +21,16 @@ proc switchColor {} {
         .btn configure -activebackground $colorcount($currentColor)
         incr currentColor
         if {$currentColor > 7} {set currentColor 0}
+        showNextColor
     }
 }
-button .btn -text "Click me!" -command \
+
+proc showNextColor {} {
+    uplevel 1 {.btn configure \
+                   -text "Next color: $colorcount([expr $currentColor % 8])"}
+}
+
+button .btn -text "" -command \
     "switchColor"
+showNextColor
 grid .btn
