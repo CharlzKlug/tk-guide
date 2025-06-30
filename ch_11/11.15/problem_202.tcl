@@ -8,6 +8,29 @@
 # a listbox. Insert new entries alphabetically by last name. Attach
 # a scrollbar to the listbox.
 
+::oo::class create Person {
+    variable firstName
+    variable lastName
+    variable loginID
+    constructor {inputFirstName inputLastName inputLoginID} {
+        set firstName $inputFirstName
+        set lastName $inputLastName
+        set loginID $inputLoginID
+    }
+    method getFirstName {} {return $firstName}
+    method getLastName {} {return $lastName}
+    method getLoginID {} {return $loginID}
+    method eq {inputPerson} {
+        return [string equal $lastName [$inputPerson getLastName]]
+    }
+    method gt {inputPerson} {
+        if {[string compare $lastName [$inputPerson getLastName]] == 1} {return 1} {return 0}
+    }
+    method lt {inputPerson} {
+        if {[string compare $lastName [$inputPerson getLastName]] == -1} {return 1} {return 0}
+    }
+}
+
 label .firstNameLabel -text "First Name:"
 entry .firstNameEntry
 
