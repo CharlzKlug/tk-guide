@@ -44,7 +44,8 @@ entry .lastNameEntry
 label .loginIDLabel -text "Login ID:"
 entry .loginIDEntry
 
-button .acceptButton -text "Accept"
+button .acceptButton -text "Accept" \
+    -command "proceedInput .firstNameEntry .lastNameEntry .loginIDEntry"
 
 listbox .namesListBox
 
@@ -63,8 +64,9 @@ set someone [Person new Semyon Gorbunkov 003]
 set personsList {}
 
 proc addPersonToList {inputPerson} {
-    upvar personsList personsList
+    global personsList
     lappend personsList $inputPerson
+    puts [personsList2stringList $personsList]
 }
 
 proc createPerson {inputFirstName inputLastName inputLoginID} {
@@ -74,7 +76,38 @@ proc createPerson {inputFirstName inputLastName inputLoginID} {
     return [Person new $inputFirstName $inputLastName $inputLoginID]
 }
 
-addPersonToList $someone
-puts $personsList
+proc proceedInput {inputFirstNameEntry inputLastNameEntry inputLoginIDEntry} {
+    puts [$inputFirstNameEntry get]
+    puts [$inputLastNameEntry get]
+    puts [$inputLoginIDEntry get]
+    addPersonToList [createPerson [$inputFirstNameEntry get] \
+                         [$inputLastNameEntry get] [$inputLoginIDEntry get]]
 
-puts [createPerson Alisa Seleznyova ""]
+}
+
+proc createListboxContent {inputListbox inputContent} {
+    $inputListbox delete 0 end
+    foreach item $inputContent {
+        $inputListbox insert end $item
+    }
+}
+
+proc person2String {inputPerson} {
+    return "[$inputPerson getFirstName] [$inputPerson getLastName] [$inputPerson getLoginID]"
+}
+
+proc personsList2stringList {inputPersonsList} {
+    set result {}
+    foreach person $inputPersonsList {
+        lappend result [person2String $person]
+    }
+    return $result
+}
+
+puts [personsList2stringList $personsList]
+puts [person2String $someone]
+createListboxContent .namesListBox {123 456 789 101}
+# addPersonToList $someone
+# puts $personsList
+
+# puts [createPerson Alisa Seleznyova ""]
