@@ -31,6 +31,10 @@
     }
 }
 
+proc compare {inputPersonA inputPersonB} {
+    return [string compare [$inputPersonA getLastName] [$inputPersonB getLastName]]
+}
+
 label .firstNameLabel -text "First Name:"
 entry .firstNameEntry
 
@@ -42,10 +46,35 @@ entry .loginIDEntry
 
 button .acceptButton -text "Accept"
 
-listbox .namesListBox -height 4
+listbox .namesListBox
 
 grid .firstNameLabel .firstNameEntry
 grid .lastNameLabel .lastNameEntry
 grid .loginIDLabel .loginIDEntry
 grid .acceptButton -columnspan 2 -sticky ew
 grid .namesListBox -row 0 -column 2 -rowspan 4
+
+Person create persA Imil Ametov 001
+Person create persB Vasya Debalcev 002
+puts [compare persA persB]
+
+set someone [Person new Semyon Gorbunkov 003]
+
+set personsList {}
+
+proc addPersonToList {inputPerson} {
+    upvar personsList personsList
+    lappend personsList $inputPerson
+}
+
+proc createPerson {inputFirstName inputLastName inputLoginID} {
+    if {[string equal $inputFirstName ""]} {error "First Name is empty!"}
+    if {[string equal $inputLastName ""]} {error "Last Name is empty!"}
+    if {[string equal $inputLoginID ""]} {error "Login ID is empty!"}
+    return [Person new $inputFirstName $inputLastName $inputLoginID]
+}
+
+addPersonToList $someone
+puts $personsList
+
+puts [createPerson Alisa Seleznyova ""]
