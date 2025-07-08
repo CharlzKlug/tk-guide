@@ -31,6 +31,8 @@
     }
 }
 
+set personsList {}
+
 proc compare {inputPersonA inputPersonB} {
     return [string compare [$inputPersonA getLastName] [$inputPersonB getLastName]]
 }
@@ -45,7 +47,7 @@ label .loginIDLabel -text "Login ID:"
 entry .loginIDEntry
 
 button .acceptButton -text "Accept" \
-    -command "proceedInput .firstNameEntry .lastNameEntry .loginIDEntry"
+    -command "proceedInput .firstNameEntry .lastNameEntry .loginIDEntry personsList"
 
 listbox .namesListBox
 
@@ -55,13 +57,11 @@ grid .loginIDLabel .loginIDEntry
 grid .acceptButton -columnspan 2 -sticky ew
 grid .namesListBox -row 0 -column 2 -rowspan 4
 
-Person create persA Imil Ametov 001
-Person create persB Vasya Debalcev 002
-puts [compare persA persB]
+# Person create persA Imil Ametov 001
+# Person create persB Vasya Debalcev 002
+# puts [compare persA persB]
 
-set someone [Person new Semyon Gorbunkov 003]
-
-set personsList {}
+# set someone [Person new Semyon Gorbunkov 003]
 
 proc addPersonToList {inputPerson} {
     global personsList
@@ -76,13 +76,16 @@ proc createPerson {inputFirstName inputLastName inputLoginID} {
     return [Person new $inputFirstName $inputLastName $inputLoginID]
 }
 
-proc proceedInput {inputFirstNameEntry inputLastNameEntry inputLoginIDEntry} {
+proc proceedInput {inputFirstNameEntry inputLastNameEntry inputLoginIDEntry inputPersonsList} {
     puts [$inputFirstNameEntry get]
     puts [$inputLastNameEntry get]
     puts [$inputLoginIDEntry get]
     addPersonToList [createPerson [$inputFirstNameEntry get] \
-                         [$inputLastNameEntry get] [$inputLoginIDEntry get]]
-
+                                  [$inputLastNameEntry get] [$inputLoginIDEntry get]]
+    upvar #0 $inputPersonsList listPersons
+    puts [personsList2stringList $listPersons]
+    # puts $listPersons
+    createListboxContent .namesListBox [personsList2stringList $listPersons]
 }
 
 proc createListboxContent {inputListbox inputContent} {
@@ -104,9 +107,9 @@ proc personsList2stringList {inputPersonsList} {
     return $result
 }
 
-puts [personsList2stringList $personsList]
-puts [person2String $someone]
-createListboxContent .namesListBox {123 456 789 101}
+# puts [personsList2stringList $personsList]
+# puts [person2String $someone]
+# createListboxContent .namesListBox {123 456 789 101}
 # addPersonToList $someone
 # puts $personsList
 
