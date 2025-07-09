@@ -38,18 +38,18 @@ proc compare {inputPersonA inputPersonB} {
 }
 
 label .firstNameLabel -text "First Name:"
-entry .firstNameEntry
+entry .firstNameEntry -background #FFFFFF
 
 label .lastNameLabel -text "Last Name:"
-entry .lastNameEntry
+entry .lastNameEntry -background #FFFFFF
 
 label .loginIDLabel -text "Login ID:"
-entry .loginIDEntry
+entry .loginIDEntry -background #FFFFFF
 
 button .acceptButton -text "Accept" \
     -command "proceedInput .firstNameEntry .lastNameEntry .loginIDEntry personsList"
 
-listbox .namesListBox
+listbox .namesListBox -background #FFFFFF
 
 grid .firstNameLabel .firstNameEntry
 grid .lastNameLabel .lastNameEntry
@@ -66,7 +66,6 @@ grid .namesListBox -row 0 -column 2 -rowspan 4
 proc addPersonToList {inputPerson} {
     global personsList
     lappend personsList $inputPerson
-    puts [personsList2stringList $personsList]
 }
 
 proc createPerson {inputFirstName inputLastName inputLoginID} {
@@ -83,8 +82,6 @@ proc proceedInput {inputFirstNameEntry inputLastNameEntry inputLoginIDEntry inpu
     addPersonToList [createPerson [$inputFirstNameEntry get] \
                                   [$inputLastNameEntry get] [$inputLoginIDEntry get]]
     upvar #0 $inputPersonsList listPersons
-    puts [personsList2stringList $listPersons]
-    # puts $listPersons
     createListboxContent .namesListBox [personsList2stringList $listPersons]
 }
 
@@ -106,11 +103,3 @@ proc personsList2stringList {inputPersonsList} {
     }
     return $result
 }
-
-# puts [personsList2stringList $personsList]
-# puts [person2String $someone]
-# createListboxContent .namesListBox {123 456 789 101}
-# addPersonToList $someone
-# puts $personsList
-
-# puts [createPerson Alisa Seleznyova ""]
