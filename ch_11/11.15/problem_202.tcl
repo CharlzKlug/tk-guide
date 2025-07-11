@@ -34,7 +34,8 @@
 set personsList {}
 
 proc compare {inputPersonA inputPersonB} {
-    return [string compare [$inputPersonA getLastName] [$inputPersonB getLastName]]
+    return [string compare [$inputPersonA getLastName] \
+                   [$inputPersonB getLastName]]
 }
 
 label .firstNameLabel -text "First Name:"
@@ -47,7 +48,8 @@ label .loginIDLabel -text "Login ID:"
 entry .loginIDEntry -background #FFFFFF
 
 button .acceptButton -text "Accept" \
-    -command "proceedInput .firstNameEntry .lastNameEntry .loginIDEntry personsList"
+       -command "proceedInput .firstNameEntry .lastNameEntry \
+.loginIDEntry personsList"
 
 listbox .namesListBox -background #FFFFFF
 
@@ -56,12 +58,6 @@ grid .lastNameLabel .lastNameEntry
 grid .loginIDLabel .loginIDEntry
 grid .acceptButton -columnspan 2 -sticky ew
 grid .namesListBox -row 0 -column 2 -rowspan 4
-
-# Person create persA Imil Ametov 001
-# Person create persB Vasya Debalcev 002
-# puts [compare persA persB]
-
-# set someone [Person new Semyon Gorbunkov 003]
 
 proc addPersonToList {inputPerson} {
     global personsList
@@ -75,14 +71,16 @@ proc createPerson {inputFirstName inputLastName inputLoginID} {
     return [Person new $inputFirstName $inputLastName $inputLoginID]
 }
 
-proc proceedInput {inputFirstNameEntry inputLastNameEntry inputLoginIDEntry inputPersonsList} {
-    puts [$inputFirstNameEntry get]
-    puts [$inputLastNameEntry get]
-    puts [$inputLoginIDEntry get]
+proc proceedInput {inputFirstNameEntry inputLastNameEntry inputLoginIDEntry \
+                                       inputPersonsList} {
     addPersonToList [createPerson [$inputFirstNameEntry get] \
-                                  [$inputLastNameEntry get] [$inputLoginIDEntry get]]
+                                  [$inputLastNameEntry get] \
+                                  [$inputLoginIDEntry get]]
     upvar #0 $inputPersonsList listPersons
-    createListboxContent .namesListBox [personsList2stringList $listPersons]
+    set listPersons [lsort -command compare $listPersons]
+    set personsStringList [personsList2stringList $listPersons]
+
+    createListboxContent .namesListBox $personsStringList
 }
 
 proc createListboxContent {inputListbox inputContent} {
@@ -93,7 +91,8 @@ proc createListboxContent {inputListbox inputContent} {
 }
 
 proc person2String {inputPerson} {
-    return "[$inputPerson getFirstName] [$inputPerson getLastName] [$inputPerson getLoginID]"
+    return "[$inputPerson getFirstName] [$inputPerson getLastName] \
+[$inputPerson getLoginID]"
 }
 
 proc personsList2stringList {inputPersonsList} {
