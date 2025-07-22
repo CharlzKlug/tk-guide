@@ -108,7 +108,7 @@ proc createListboxContent {inputListbox inputContent} {
 }
 
 proc person2String {inputPerson} {
-    return "[$inputPerson getFirstName] [$inputPerson getLastName]\
+    return "[$inputPerson getFirstName] [$inputPerson getLastName]:\
  [$inputPerson getLoginID]"
 }
 
