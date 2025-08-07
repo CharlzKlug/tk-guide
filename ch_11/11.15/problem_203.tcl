@@ -26,10 +26,12 @@
         return [string equal $lastName [$inputPerson getLastName]]
     }
     method gt {inputPerson} {
-        if {[string compare $lastName [$inputPerson getLastName]] == 1} {return 1} {return 0}
+        if {[string compare $lastName [$inputPerson getLastName]] == 1} \
+               {return 1} {return 0}
     }
     method lt {inputPerson} {
-        if {[string compare $lastName [$inputPerson getLastName]] == -1} {return 1} {return 0}
+        if {[string compare $lastName [$inputPerson getLastName]] == -1} \
+               {return 1} {return 0}
     }
 }
 
@@ -40,41 +42,16 @@ proc compare {inputPersonA inputPersonB} {
                    [$inputPersonB getLastName]]
 }
 
-proc saveToFile {inputFileName inputPersonList} {
+proc saveToFile {inputFileName inputPersonList inputListbox} {
     set personsDatasList [personsList2stringList $inputPersonList]
     if {[llength $personsDatasList] == 0} return
     set fid [open $inputFileName w]
     foreach item $personsDatasList {
-        puts $fid $item
+        puts $fid "$inputListbox insert end \"$item\""
     }
     close $fid
     tk_messageBox -message "Data saved to \"save.dat\" file!" -type ok
 }
-
-label .firstNameLabel -text "First Name:"
-entry .firstNameEntry -background #FFFFFF
-
-label .lastNameLabel -text "Last Name:"
-entry .lastNameEntry -background #FFFFFF
-
-label .loginIDLabel -text "Login ID:"
-entry .loginIDEntry -background #FFFFFF
-
-button .acceptButton -text "Accept" \
-       -command "proceedInput .firstNameEntry .lastNameEntry \
-.loginIDEntry personsList"
-
-# button .saveButton -text "Save" -command "saveToFile save.dat [list $personsList]"
-button .saveButton -text "Save" -command "eval saveToFile save.dat \[list \$personsList \]"
-
-listbox .namesListBox -background #FFFFFF
-
-grid .firstNameLabel .firstNameEntry
-grid .lastNameLabel .lastNameEntry
-grid .loginIDLabel .loginIDEntry
-grid .acceptButton -columnspan 2 -sticky ew
-grid .saveButton -columnspan 2 -sticky ew
-grid .namesListBox -row 0 -column 2 -rowspan 5
 
 proc addPersonToList {inputPerson} {
     global personsList
@@ -98,6 +75,9 @@ proc proceedInput {inputFirstNameEntry inputLastNameEntry inputLoginIDEntry \
     set personsStringList [personsList2stringList $listPersons]
 
     createListboxContent .namesListBox $personsStringList
+    $inputFirstNameEntry delete 0 end
+    $inputLastNameEntry delete 0 end
+    $inputLoginIDEntry delete 0 end
 }
 
 proc createListboxContent {inputListbox inputContent} {
@@ -119,3 +99,28 @@ proc personsList2stringList {inputPersonsList} {
     }
     return $result
 }
+
+label .firstNameLabel -text "First Name:"
+entry .firstNameEntry -background #FFFFFF
+
+label .lastNameLabel -text "Last Name:"
+entry .lastNameEntry -background #FFFFFF
+
+label .loginIDLabel -text "Login ID:"
+entry .loginIDEntry -background #FFFFFF
+
+button .acceptButton -text "Accept" \
+       -command "proceedInput .firstNameEntry .lastNameEntry \
+.loginIDEntry personsList"
+
+button .saveButton -text "Save" \
+       -command "eval saveToFile save.dat \[list \$personsList \] .namesListBox"
+
+listbox .namesListBox -background #FFFFFF
+
+grid .firstNameLabel .firstNameEntry
+grid .lastNameLabel .lastNameEntry
+grid .loginIDLabel .loginIDEntry
+grid .acceptButton -columnspan 2 -sticky ew
+grid .saveButton -columnspan 2 -sticky ew
+grid .namesListBox -row 0 -column 2 -rowspan 5
