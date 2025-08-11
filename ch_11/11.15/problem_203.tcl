@@ -116,6 +116,8 @@ button .acceptButton -text "Accept" \
 button .saveButton -text "Save" \
        -command "eval saveToFile save.dat \[list \$personsList \] .namesListBox"
 
+button .loadButton -text "Load" -command "source save.dat"
+
 listbox .namesListBox -background #FFFFFF
 
 grid .firstNameLabel .firstNameEntry
@@ -123,4 +125,5 @@ grid .lastNameLabel .lastNameEntry
 grid .loginIDLabel .loginIDEntry
 grid .acceptButton -columnspan 2 -sticky ew
 grid .saveButton -columnspan 2 -sticky ew
-grid .namesListBox -row 0 -column 2 -rowspan 5
+grid .loadButton -columnspan 2 -sticky ew
+grid .namesListBox -row 0 -column 2 -rowspan 6
