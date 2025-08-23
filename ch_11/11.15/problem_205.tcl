@@ -37,3 +37,28 @@ proc showDict {dct indent} {
         showDict $v [expr {$indent + 2}]
     }
 }
+
+# label .startingDirectoryLabel -text "Starting directory:"
+entry .startingDirectoryEntry -background #FFFFFF
+# button .searchButton -text "Search"
+
+# grid .startingDirectoryLabel .startingDirectoryEntry .searchButton -sticky w
+# pack .startingDirectoryLabel -side top -anchor w
+# pack .startingDirectoryEntry -side right -after .startingDirectoryLabel
+
+# frame .root -background black
+# pack .root -side left -anchor w
+
+# frame .root.twoLabels -background gray50
+# label .root.twoLabels.upperLabel -text "twoLabels no fill top"
+# label .root.twoLabels.lowerLabel -text "twoLabels no fill lower"
+# pack .root.twoLabels -side left
+# pack .root.twoLabels.upperLabel -side top
+# pack .root.twoLabels.lowerLabel -side bottom
+
+# frame .root.nofill -background gray50
+# label .root.nofill.label -text "nofill, noexpand"
+# pack .root.nofill -side left
+# pack .root.nofill.label
+
+pack .startingDirectoryEntry -fill x
