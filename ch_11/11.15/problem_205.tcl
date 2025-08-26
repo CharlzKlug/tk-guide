@@ -39,13 +39,14 @@ proc showDict {dct indent} {
 }
 
 # label .startingDirectoryLabel -text "Starting directory:"
-entry .startingDirectoryEntry -background #FFFFFF
+# entry .startingDirectoryEntry -background #FFFFFF
 # button .searchButton -text "Search"
 
 # grid .startingDirectoryLabel .startingDirectoryEntry .searchButton -sticky w
 # pack .startingDirectoryLabel -side top -anchor w
 # pack .startingDirectoryEntry -side right -after .startingDirectoryLabel
 
+# ---
 # frame .root -background black
 # pack .root -side left -anchor w
 
@@ -55,10 +56,43 @@ entry .startingDirectoryEntry -background #FFFFFF
 # pack .root.twoLabels -side left
 # pack .root.twoLabels.upperLabel -side top
 # pack .root.twoLabels.lowerLabel -side bottom
+# ---
 
 # frame .root.nofill -background gray50
 # label .root.nofill.label -text "nofill, noexpand"
 # pack .root.nofill -side left
 # pack .root.nofill.label
 
-pack .startingDirectoryEntry -fill x
+# frame .root
+# pack .root
+
+# label .root.startDirLabel -text "Starting directory:"
+# pack .root.startDirLabel -side left
+# pack .root.startingDirectoryEntry -side left -after .root.startDirLabel -fill x
+
+# frame .root2
+# pack .root2 -side left -after .root -fill x
+# entry .root2.startingDirectoryEntry -background #FFFFFF
+# pack .root2.startingDirectoryEntry -fill x
+
+# В этом фрейме лежат элементы управления
+frame .frameControl
+pack .frameControl -fill x
+
+label .frameControl.la -background gray80 -text LEFT -relief solid
+label .frameControl.lb -background green -text TOP -relief solid
+label .frameControl.lc -background red -text RIGHT -relief solid
+
+pack .frameControl.la -side left -anchor n
+pack .frameControl.lb -side left -fill x -expand yes -after .frameControl.la -anchor n
+pack .frameControl.lc -side left -after .frameControl.lb -anchor n
+
+# В этом фрейме лежит метка с текущей обрабатываемой директорией
+frame .frameInfo
+pack .frameInfo -fill x
+
+label .frameInfo.lInfo -background yellow -text "Directory: NONE" -relief solid
+pack .frameInfo.lInfo -side left
+
+# label .ld -background blue -text MIDDLE -relief solid
+# pack .ld -side right
