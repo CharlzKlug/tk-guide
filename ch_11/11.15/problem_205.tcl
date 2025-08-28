@@ -94,5 +94,7 @@ pack .frameInfo -fill x
 label .frameInfo.lInfo -background yellow -text "Directory: NONE" -relief solid
 pack .frameInfo.lInfo -side left
 
+listbox .lbTest -background #FFFFFF
+pack .lbTest -fill both -expand yes
 # label .ld -background blue -text MIDDLE -relief solid
 # pack .ld -side right
