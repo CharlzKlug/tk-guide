@@ -79,13 +79,15 @@ proc showDict {dct indent} {
 frame .frameControl
 pack .frameControl -fill x
 
-label .frameControl.la -background gray80 -text LEFT -relief solid
-label .frameControl.lb -background green -text TOP -relief solid
-label .frameControl.lc -background red -text RIGHT -relief solid
+label .frameControl.lStartDir -text "Starting directory:"
+entry .frameControl.eStartDir -background #FFFFFF -relief solid
+button .frameControl.bStartSearch -text RIGHT -relief solid -command "processSearch .lbTest"
 
-pack .frameControl.la -side left -anchor n
-pack .frameControl.lb -side left -fill x -expand yes -after .frameControl.la -anchor n
-pack .frameControl.lc -side left -after .frameControl.lb -anchor n
+pack .frameControl.lStartDir -side left -anchor w
+pack .frameControl.eStartDir -side left -fill x -expand yes \
+     -after .frameControl.lStartDir -anchor w
+pack .frameControl.bStartSearch -side left -after .frameControl.eStartDir \
+     -anchor w
 
 # В этом фрейме лежит метка с текущей обрабатываемой директорией
 frame .frameInfo
@@ -96,5 +98,11 @@ pack .frameInfo.lInfo -side left
 
 listbox .lbTest -background #FFFFFF
 pack .lbTest -fill both -expand yes
-# label .ld -background blue -text MIDDLE -relief solid
-# pack .ld -side right
+
+proc processSearch {inputListWidget} {
+    for {set i 0} {$i < 10} {incr i} {
+        $inputListWidget insert end "123"
+        $inputListWidget insert end " 123"
+        set sleeping 1; after 1000 set sleeping 0; vwait sleeping
+    }
+}
