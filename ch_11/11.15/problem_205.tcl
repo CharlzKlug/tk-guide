@@ -48,7 +48,7 @@ entry .frameControl.eStartDir -background #FFFFFF -relief solid
 # button .frameControl.bStartSearch -text "Display directory" \
 #        -relief solid -command "fileDict /home/user/projects"
 button .frameControl.bStartSearch -text "Display directory" \
-       -relief solid -command "eval puts \[clock seconds\]"
+       -relief solid -command "puts \[.frameControl.eStartDir get\]"
 
 pack .frameControl.lStartDir -side left -anchor w
 pack .frameControl.eStartDir -side left -fill x -expand yes \
