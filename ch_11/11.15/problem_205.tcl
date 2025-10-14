@@ -64,7 +64,10 @@ pack .frameInfo -fill x
 label .frameInfo.lInfo -background yellow -text "Directory: NONE" -relief solid
 pack .frameInfo.lInfo -side left
 
-listbox .lbTest -background #FFFFFF
+scrollbar .scroll -command ".lbTest yview"
+listbox .lbTest -yscrollcommand ".scroll set" -background #FFFFFF
+# grid .lbTest .scroll -sticky ns
+# pack .scroll .lbTest -fill both -expand yes
 pack .lbTest -fill both -expand yes
 
 proc processSearch {inputListWidget} {
