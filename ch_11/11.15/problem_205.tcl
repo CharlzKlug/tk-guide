@@ -20,7 +20,9 @@ proc fileDict {parent} {
                   }
            }
        } else {
-           tk_messageBox -title "Warning" -message "Empty path is not allowed!" -type ok -icon warning
+           tk_messageBox -title "Warning" \
+                         -message "Empty path is not allowed!" \
+                         -type ok -icon warning
        }
 }
 
