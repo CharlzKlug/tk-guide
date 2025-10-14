@@ -11,16 +11,17 @@
 # spaces.
 
 proc fileDict {parent} {
-    set dct {}
-    foreach fl [glob -nocomplain $parent/*] {
-        if {[file type $fl] eq "directory"} {
-               dict set dct $fl [fileDict $fl]
-           } else {
-               .lbTest insert end $fl
-               dict set dct $fl {}
+    if {$parent != ""} {
+           foreach fl [glob -nocomplain $parent/*] {
+               if {[file type $fl] eq "directory"} {
+                      fileDict $fl
+                  } else {
+                      .lbTest insert end $fl
+                  }
            }
-    }
-    return $dct
+       } else {
+           tk_messageBox -title "Warning" -message "Empty path is not allowed!" -type ok -icon warning
+       }
 }
 
 proc showDict {dct indent} {
@@ -45,10 +46,8 @@ pack .frameControl -fill x
 
 label .frameControl.lStartDir -text "Starting directory:"
 entry .frameControl.eStartDir -background #FFFFFF -relief solid
-# button .frameControl.bStartSearch -text "Display directory" \
-#        -relief solid -command "fileDict /home/user/projects"
 button .frameControl.bStartSearch -text "Display directory" \
-       -relief solid -command "puts \[.frameControl.eStartDir get\]"
+       -relief solid -command "fileDict \[.frameControl.eStartDir get\]"
 
 pack .frameControl.lStartDir -side left -anchor w
 pack .frameControl.eStartDir -side left -fill x -expand yes \
