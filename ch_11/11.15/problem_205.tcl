@@ -20,7 +20,7 @@ proc fileDict {parent} {
                   }
            }
        } else {
-           tk_messageBox -title "Warning" \
+           tk_messageBox -title "Error" \
                          -message "Empty path is not allowed!" \
                          -type ok -icon error
        }
@@ -64,11 +64,17 @@ pack .frameInfo -fill x
 label .frameInfo.lInfo -background yellow -text "Directory: NONE" -relief solid
 pack .frameInfo.lInfo -side left
 
-scrollbar .scroll -command ".lbTest yview"
-listbox .lbTest -yscrollcommand ".scroll set" -background #FFFFFF
-# grid .lbTest .scroll -sticky ns
+# В этом фрейме будут список с найденными файлами и скроллбары
+frame .frameFoundFiles
+pack .frameFoundFiles -fill both -expand yes
+
+scrollbar .frameFoundFiles.scroll -command ".lbTest yview"
+listbox .frameFoundFiles.lbTest -yscrollcommand ".frameFoundFiles.scroll set" -background #FFFFFF
+pack .frameFoundFiles.lbTest -fill both -expand yes -side left
+pack .frameFoundFiles.scroll -fill y -side left
+# grid .frameFoundFiles.lbTest .frameFoundFiles.scroll -sticky ns
 # pack .scroll .lbTest -fill both -expand yes
-pack .lbTest -fill both -expand yes
+
 
 proc processSearch {inputListWidget} {
     for {set i 0} {$i < 10} {incr i} {
