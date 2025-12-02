@@ -65,13 +65,16 @@ label .frameInfo.lInfo -background yellow -text "Directory: NONE" -relief solid
 pack .frameInfo.lInfo -side left
 
 # В этом фрейме будут список с найденными файлами и скроллбары
-frame .frameFoundFiles
-pack .frameFoundFiles -fill both -expand yes
+frame .frameFoundFilesVerticalScrollbox
+pack .frameFoundFilesVerticalScrollbox -fill both -expand yes
 
-scrollbar .frameFoundFiles.scroll -command ".lbTest yview"
-listbox .frameFoundFiles.lbTest -yscrollcommand ".frameFoundFiles.scroll set" -background #FFFFFF
-pack .frameFoundFiles.lbTest -fill both -expand yes -side left
-pack .frameFoundFiles.scroll -fill y -side left
+scrollbar .frameFoundFilesVerticalScrollbox.scroll \
+          -command ".frameFoundFilesVerticalScrollbox.lbTest yview"
+listbox .frameFoundFilesVerticalScrollbox.lbTest \
+        -yscrollcommand ".frameFoundFilesVerticalScrollbox.scroll set" \
+        -background #FFFFFF
+pack .frameFoundFilesVerticalScrollbox.lbTest -fill both -expand yes -side left
+pack .frameFoundFilesVerticalScrollbox.scroll -fill y -side left
 # grid .frameFoundFiles.lbTest .frameFoundFiles.scroll -sticky ns
 # pack .scroll .lbTest -fill both -expand yes
 
