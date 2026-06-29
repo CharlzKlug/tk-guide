@@ -16,7 +16,8 @@ proc fileDict {parent} {
                if {[file type $fl] eq "directory"} {
                       fileDict $fl
                   } else {
-                      .lbTest insert end $fl
+                      # .lbTest insert end $fl
+                      .frameFoundFilesVerticalScrollbox.lbTest insert end $fl
                   }
            }
        } else {
