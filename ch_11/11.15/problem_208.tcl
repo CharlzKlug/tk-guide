@@ -9,14 +9,22 @@
 # 'toplevel' command in the previous exercise to 'frame-toplevel'. What is
 # different between the two implementations?
 
+proc frame-toplevel {inputWindow} {
+    set innerFrame [frame .frameControl]
+    pack .frameControl -fill x
+    return $innerFrame
+}
+
 package require Tk
 
-# 1. Создаем главное окно
+# 1. Создаем главное окно.
 wm title . "Стартовое приложение"
 
-set innerFrame [frame .frameControl]
-pack .frameControl -fill x
-set myLabel [label .frameControl.lStartDir -text "123"]
-pack .frameControl.lStartDir -side left -anchor w
+# 2. Вызываем процедуру, создающую фрейм в окне '.'.
+set myFrame [frame-toplevel .]
 
-puts $innerFrame
+# 3. Создаём метку.
+set myLabel [label ${myFrame}.lStartDir -text "123"]
+
+# 4. Размещаем метку во фрейме.
+pack ${myLabel} -side left -anchor w
