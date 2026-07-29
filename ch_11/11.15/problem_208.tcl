@@ -11,14 +11,12 @@
 
 package require Tk
 
-# 1. Создаем главное окно (оно будет невидимым)
+# 1. Создаем главное окно
 wm title . "Стартовое приложение"
-wm withdraw .
 
-# 2. Вызываем диалоговое окно
-tk_messageBox -message "Добро пожаловать! Это сообщение появляется при старте." \
-              -type ok \
-              -icon info
+set innerFrame [frame .frameControl]
+pack .frameControl -fill x
+set myLabel [label .frameControl.lStartDir -text "123"]
+pack .frameControl.lStartDir -side left -anchor w
 
-# 3. Закрываем приложение после нажатия ОК
-destroy .
+puts $innerFrame
